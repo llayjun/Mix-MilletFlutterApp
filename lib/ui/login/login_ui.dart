@@ -106,7 +106,7 @@ class _LoginUiState extends State<LoginUi> {
                     alignment: Alignment.center,
                     width: Screen.w(),
                     height: Screen.h(120),
-                    child: TextAndStyle("立即登录", AppColors.color_333333, 40),
+                    child: TextAndStyle("${model.string??"立即登录"}", AppColors.color_333333, 40),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(63.0),
                         gradient: LinearGradient(colors: [
