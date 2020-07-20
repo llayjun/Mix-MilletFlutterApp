@@ -1,13 +1,14 @@
+import 'package:MilletFlutterApp/ui/login/login_ui.dart';
+import 'package:MilletFlutterApp/util/log_util.dart';
+import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:flutter/material.dart';
-import 'package:mille/constant/config.dart';
-import 'package:mille/net/http_manager.dart';
-import 'package:mille/ui/login/login_ui.dart';
-import 'package:mille/util/log_util.dart';
-import 'package:mille/util/sp_util.dart';
 
+import 'constant/config.dart';
+import 'net/http_manager.dart';
 import 'net/lcfarm_log_interceptor.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Config.fill(debug: true, dbName: "millet", apiUrl: "https://wanandroid.com/");
   /// 初始化日志
   LogUtil.init(isDebug: true, tag: "MilletTag");

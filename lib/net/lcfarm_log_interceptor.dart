@@ -1,5 +1,5 @@
+import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:dio/dio.dart';
-import 'package:mille/util/log_util.dart';
 
 void log2Console(Object object) {
   LogUtil.v(object);

@@ -1,10 +1,10 @@
 import 'dart:core';
 
+import 'package:MilletFlutterApp/bean/base/base_bean.dart';
+import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:mille/bean/base/base_bean.dart';
-import 'package:mille/util/log_util.dart';
 
 import 'http_error.dart';
 

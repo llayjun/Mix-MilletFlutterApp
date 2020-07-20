@@ -1,4 +1,4 @@
-package com.live.mille
+package com.live.millet
 
 import io.flutter.embedding.android.FlutterActivity
 
