@@ -1,0 +1,27 @@
+import 'package:MilletFlutterApp/net/http_manager.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+class LoginVModel with ChangeNotifier {
+  /// 登录
+  login(String name, String pass) {
+    if (TextUtil.isEmpty(name)) {
+      Fluttertoast.showToast(msg: "请输入手机号");
+      return;
+    }
+    if (TextUtil.isEmpty(pass)) {
+      Fluttertoast.showToast(msg: "请输入密码");
+      return;
+    }
+    HttpManager().get(
+        url: "wxarticle/chapters/json",
+        successCallback: (value) {
+          Fluttertoast.showToast(msg: value.toString());
+        },
+        errorCallback: (value) {
+          Fluttertoast.showToast(msg: value.message);
+        },
+        tag: "");
+  }
+}

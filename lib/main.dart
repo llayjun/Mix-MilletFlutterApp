@@ -1,10 +1,12 @@
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
+import 'package:MilletFlutterApp/ui/login/login_vm.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 import 'constant/config.dart';
 import 'net/http_manager.dart';
@@ -44,7 +46,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(providers: [
+      ChangeNotifierProvider<LoginVModel>.value(value: LoginVModel()),
+    ],
+      child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -60,7 +65,7 @@ class MyApp extends StatelessWidget {
         const Locale('en', 'US'),
       ],
       home: App(),
-    );
+    ),);
   }
 
 }
