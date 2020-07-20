@@ -1,7 +1,10 @@
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
+import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'constant/config.dart';
 import 'net/http_manager.dart';
@@ -11,37 +14,70 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Config.fill(debug: true, dbName: "millet", apiUrl: "https://wanandroid.com/");
   /// 初始化日志
-  LogUtil.init(isDebug: true, tag: "MilletTag");
+  LogUtil.init(isDebug: Config.inst.debug, tag: "MilletTag");
   /// 初始化网络
   HttpManager().init(baseUrl: Config.inst.apiUrl, interceptors: [LcfarmLogInterceptor()]);
   /// 初始化sp
   await SpUtil().init();
+  /// 初始化刷新
+  await initRefresh();
   runApp(MyApp());
 }
 
+Future initRefresh() async {
+  /// 初始化刷新样式
+  EasyRefresh.defaultHeader = ClassicalHeader(
+      refreshText: "下拉刷新",
+      refreshReadyText: "释放刷新",
+      refreshingText: "正在刷新",
+      refreshedText: "刷新完成",
+      infoText: '更新于 %T');
+  EasyRefresh.defaultFooter = ClassicalFooter(
+      loadText: "下拉加载更多",
+      loadReadyText: "释放加载更多",
+      loadingText: "加载中",
+      loadedText: "加载完成",
+      infoText: '更新于 %T');
+}
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginUi(),
+      locale: const Locale('zh'),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('zh', 'CH'),
+        const Locale('en', 'US'),
+      ],
+      home: App(),
     );
   }
+
 }
+
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  Widget build(BuildContext context) {
+    /// 初始化尺寸
+    Screen.init(context, 1080, 1920);
+    return LoginUi();
+  }
+
+}
+
+

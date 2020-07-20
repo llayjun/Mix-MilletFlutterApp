@@ -12,9 +12,9 @@ class LcfarmLogInterceptor extends Interceptor {
   LcfarmLogInterceptor({
     this.request = true,
     this.requestHeader = true,
-    this.requestBody = false,
+    this.requestBody = true,
     this.responseHeader = true,
-    this.responseBody = false,
+    this.responseBody = true,
     this.error = true,
     this.logPrint = log2Console,
   });
