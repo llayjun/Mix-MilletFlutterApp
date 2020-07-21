@@ -11,11 +11,11 @@ class LoginVModel with ChangeNotifier {
   /// 登录
   login(String name, String pass) {
     if (TextUtil.isEmpty(name)) {
-      Fluttertoast.showToast(msg: "请输入手机号手机号12");
+      Fluttertoast.showToast(msg: "请输入手机号手机号12111");
       return;
     }
     if (TextUtil.isEmpty(pass)) {
-      Fluttertoast.showToast(msg: "请输入密码密码12");
+      Fluttertoast.showToast(msg: "请输入密码密码12111");
       return;
     }
     HttpManager().get(
