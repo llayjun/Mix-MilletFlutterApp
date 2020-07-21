@@ -1,3 +1,4 @@
+import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
 import 'package:MilletFlutterApp/ui/login/login_vm.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
@@ -14,7 +15,7 @@ import 'net/lcfarm_log_interceptor.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Config.fill(debug: true, dbName: "millet", apiUrl: "https://wanandroid.com/");
+  Config.fill(debug: Constant.Debug, dbName: "millet", apiUrl: Constant.BaseUrl);
   /// 初始化日志
   LogUtil.init(isDebug: Config.inst.debug, tag: "MilletTag");
   /// 初始化网络
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// 这边的MultiProvider是设置整个app的状态
     return MultiProvider(providers: [
       ChangeNotifierProvider<LoginVModel>.value(value: LoginVModel()),
     ],

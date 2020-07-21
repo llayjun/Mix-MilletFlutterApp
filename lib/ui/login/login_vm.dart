@@ -1,12 +1,22 @@
-import 'package:MilletFlutterApp/net/http_manager.dart';
+import 'package:MilletFlutterApp/test/article_bean.dart';
+import 'package:MilletFlutterApp/vm/base_vmodel.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginVModel with ChangeNotifier {
-  String _string;
+class LoginVModel extends BaseVModel {
+  List<ArticleBean> _articleBeanList = [];
 
-  String get string => _string;
+  List<ArticleBean> get articleBeanList => _articleBeanList;
+
+  @override
+  void initData() {
+
+  }
+
+  @override
+  void loadData() {
+
+  }
 
   /// 登录
   login(String name, String pass) {
@@ -18,16 +28,12 @@ class LoginVModel with ChangeNotifier {
       Fluttertoast.showToast(msg: "请输入密码密码");
       return;
     }
-    HttpManager().get(
-        url: "wxarticle/chapters/json",
-        successCallback: (value) {
-          Fluttertoast.showToast(msg: value.toString());
-          _string = "获取接口成功";
-          notifyListeners();
-        },
-        errorCallback: (value) {
-          Fluttertoast.showToast(msg: value.message);
-        },
-        tag: "");
+    apiService.getInfo().then((value) => {
+      _articleBeanList = value,
+      notifyListeners()
+    }).catchError((value) {
+      Fluttertoast.showToast(msg: value);
+    });
   }
+
 }
