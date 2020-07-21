@@ -1,20 +1,16 @@
 import 'package:MilletFlutterApp/test/article_bean.dart';
+import 'package:MilletFlutterApp/vm/base_refresh_list_vmodel.dart';
 import 'package:MilletFlutterApp/vm/base_vmodel.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginVModel extends BaseVModel {
+class LoginVModel extends BaseRefreshListVModel {
   List<ArticleBean> _articleBeanList = [];
 
   List<ArticleBean> get articleBeanList => _articleBeanList;
 
   @override
-  void initData() {
-
-  }
-
-  @override
-  void loadData() {
+  void onDataReady() {
 
   }
 

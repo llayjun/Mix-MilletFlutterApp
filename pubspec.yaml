@@ -47,6 +47,7 @@ dependencies:
   image_picker: ^0.6.6+1  #选择图片
   image_cropper: ^1.1.0    #图片剪切
   common_utils: ^1.2.1 #基础工具
+  flutter_spinkit: ^4.0.0 #加载框
 
 dev_dependencies:
   flutter_test:
