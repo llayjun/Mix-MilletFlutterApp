@@ -6,6 +6,8 @@ A new Flutter application.
 
 This project is a starting point for a Flutter application.
 
+### 搭建的一个flutter 界面显示，网络请求，数据展示等框架，便于快速开发flutter项目
+
 1. 使用Dart class from json 插件来创建实体bean，不用官方的方式，避免删除一些无用的实体时候出现问题
 
 2. LoadingContainer中包含一些界面状态
