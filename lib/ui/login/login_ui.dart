@@ -116,7 +116,7 @@ class _LoginUiState extends State<LoginUi> {
                             ])),
                       ),
                       onTap: () {
-                        model.login(_nameController.text, _passController.text);
+                        model.login(context, _nameController.text, _passController.text);
                       },
                     )
                   ],

@@ -1,6 +1,7 @@
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/vm/base_vmodel.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 abstract class BaseRefreshListVModel<T> extends BaseVModel {
   /// 页面数据
@@ -17,18 +18,13 @@ abstract class BaseRefreshListVModel<T> extends BaseVModel {
 
   EasyRefreshController get easyRefreshController => _easyRefreshController;
 
-  /// 第一次进入页面loading skeleton
-  initData() {
-    refresh();
-  }
-
   /// 下拉刷新数据
   refresh() {
     _pageNum = 1;
     Future<dynamic> result = loadListData(pageNum: _pageNum);
     List<T> data = [];
     result.then((value) {
-      data = value.data;
+      data = value;
       if (data.isEmpty) {
         _easyRefreshController.finishLoad(success: true, noMore: true);
         list.clear();
@@ -43,6 +39,7 @@ abstract class BaseRefreshListVModel<T> extends BaseVModel {
       }
     }).catchError((error) {
       setError();
+      Fluttertoast.showToast(msg: error);
     });
   }
 
@@ -51,7 +48,7 @@ abstract class BaseRefreshListVModel<T> extends BaseVModel {
     Future<dynamic> result = loadListData(pageNum: ++_pageNum);
     List<T> data = [];
     result.then((value) {
-      data = value.data;
+      data = value;
       if (data.isEmpty) {
         _easyRefreshController.finishLoad(success: true, noMore: true);
       } else {
@@ -63,6 +60,7 @@ abstract class BaseRefreshListVModel<T> extends BaseVModel {
       setSuccess();
     }).catchError((error) {
       setError();
+      Fluttertoast.showToast(msg: error);
     });
   }
 

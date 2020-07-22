@@ -7,21 +7,30 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 enum RefreshType {
-  none,/// 一般布局
-  normal,/// 刷新列表布局
-  withWidget,/// 包含子界面布局
+  none,
+
+  /// 一般布局，默认none
+  normal,
+
+  /// 刷新列表布局
+  withWidget,
+
+  /// 包含子界面布局
 }
 
+/// 定义加载成功的布局（none, normal）
 typedef DataChild<T> = Widget Function(T value);
 
-typedef DataOutRefreshChild<T> = Widget Function(T value, EasyRefresh easyRefresh);
+/// 定义包含刷新功能子界面，比如搜索界面，顶部搜索框，底部是刷新列表(withWidget)
+typedef DataOutRefreshChild<T> = Widget Function(
+    T value, EasyRefresh easyRefresh);
 
 class LoadingContainer<T extends BaseRefreshListVModel> extends StatefulWidget {
-  final DataChild<T> successChild; // 成功的子布局
+  final DataChild<T> successChild; // 成功的子布局（普通和刷新布局）
+  final DataOutRefreshChild<T> outRefreshChild; // 包含刷新功能子界面
   final T model; // model
   final Function(T model) onModelReady; // 准备数据
   final Widget noDateWidget; // 没有数据的界面，可自定义
-  final DataOutRefreshChild<T> outRefreshChild; // 包含刷新功能子界面
   final bool autoDispose; // 自动取消，一般不做处理
   final RefreshType refreshType; // 布局状态，包含普通，一般列表，带子布局的列表
 
@@ -131,9 +140,12 @@ class LoadingContainerState<T extends BaseRefreshListVModel>
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('加载失败！'),
+            Text('加载失败'),
             FlatButton(
+                textColor: AppColors.color_FFFFFF,
+                color: AppColors.color_2d84eb,
                 onPressed: () {
                   /// 重新加载数据
                   model.onDataReady();

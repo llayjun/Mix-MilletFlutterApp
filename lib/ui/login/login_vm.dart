@@ -1,7 +1,9 @@
 import 'package:MilletFlutterApp/test/article_bean.dart';
+import 'package:MilletFlutterApp/ui/main/main_page.dart';
+import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/vm/base_refresh_list_vmodel.dart';
-import 'package:MilletFlutterApp/vm/base_vmodel.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginVModel extends BaseRefreshListVModel {
@@ -15,7 +17,7 @@ class LoginVModel extends BaseRefreshListVModel {
   }
 
   /// 登录
-  login(String name, String pass) {
+  login(BuildContext context, String name, String pass) {
     if (TextUtil.isEmpty(name)) {
       Fluttertoast.showToast(msg: "请输入手机号手机号");
       return;
@@ -26,7 +28,8 @@ class LoginVModel extends BaseRefreshListVModel {
     }
     apiService.getInfo().then((value) => {
       _articleBeanList = value,
-      notifyListeners()
+      notifyListeners(),
+      NavigatorUtil.push(context, MainPage())
     }).catchError((value) {
       Fluttertoast.showToast(msg: value);
     });
