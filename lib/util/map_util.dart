@@ -48,5 +48,6 @@ class MapUtil {
       return false;
     }
     await launch(url);
+    return canLaunchUrl;
   }
 }
