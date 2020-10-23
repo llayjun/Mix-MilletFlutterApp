@@ -1,6 +1,8 @@
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
 import 'package:MilletFlutterApp/ui/login/login_vm.dart';
+import 'package:MilletFlutterApp/ui/main/main_page.dart';
+import 'package:MilletFlutterApp/ui/register/register_ui.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
@@ -54,9 +56,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor:Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      routes: {
+        "/login": (context) => LoginUi(),
+        "/register": (context) => RegisterUi(),
+        "/home": (context) => MainPage(),
+      },
       locale: const Locale('zh'),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

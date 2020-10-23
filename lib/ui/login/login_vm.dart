@@ -1,15 +1,21 @@
-import 'package:MilletFlutterApp/test/article_bean.dart';
 import 'package:MilletFlutterApp/ui/main/main_page.dart';
 import 'package:MilletFlutterApp/util/navigator_util.dart';
-import 'package:MilletFlutterApp/vm/base_refresh_list_vmodel.dart';
+import 'package:MilletFlutterApp/vm/base_vmodel.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginVModel extends BaseRefreshListVModel {
-  List<ArticleBean> _articleBeanList = [];
+class LoginVModel extends BaseVModel {
 
-  List<ArticleBean> get articleBeanList => _articleBeanList;
+  // 协议选中
+  bool _check = false;
+
+  bool get check => _check;
+
+  set check(bool value) {
+    _check = value;
+    notifyListeners();
+  }
 
   @override
   void onDataReady() {
@@ -26,8 +32,11 @@ class LoginVModel extends BaseRefreshListVModel {
       Fluttertoast.showToast(msg: "请输入密码密码");
       return;
     }
-    apiService.getInfo().then((value) => {
-      _articleBeanList = value,
+    if (!_check) {
+      Fluttertoast.showToast(msg: "请先同意服务");
+      return;
+    }
+    apiService.login(name, pass).then((value) => {
       notifyListeners(),
       NavigatorUtil.push(context, MainPage())
     }).catchError((value) {

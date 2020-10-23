@@ -28,7 +28,7 @@ class HomePageState extends State<HomePage> {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return SizeSpace(height: Screen.h(20));
+                  return SizeDivider(height: Screen.h(20));
                 },
                 itemCount: data.list.length);
           },

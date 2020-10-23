@@ -8,16 +8,16 @@ class BaseBean<T> {
   factory BaseBean.fromJson(Map<String, dynamic> json) {
     return BaseBean(
       data: json['data'],
-      errorCode: json['errorCode'],
-      errorMsg: json['errorMsg'],
+      errorCode: json['code'],
+      errorMsg: json['msg'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['data'] = this.data;
-    data['errorCode'] = this.errorCode;
-    data['errorMsg'] = this.errorMsg;
+    data['code'] = this.errorCode;
+    data['msg'] = this.errorMsg;
     return data;
   }
 }
