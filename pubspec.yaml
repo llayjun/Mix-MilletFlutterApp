@@ -48,6 +48,7 @@ dependencies:
   image_cropper: ^1.1.0    #图片剪切
   common_utils: ^1.2.1 #基础工具
   flutter_spinkit: ^4.0.0 #加载框
+  flutter_swiper: ^1.1.6 #轮播图
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,10 @@ flutter:
     - assets/images/work-select.png
     - assets/images/mine-normal.png
     - assets/images/mine-select.png
+    - assets/images/ic_homt_top_bg.png
+    - assets/images/ic_top_1.png
+    - assets/images/ic_top_2.png
+    - assets/images/ic_top_3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -19,4 +19,10 @@ class AppImages {
   static final String assetsMineInActive = 'assets/images/mine-normal.png';
   static final String assetsMineActive = 'assets/images/mine-select.png';
 
+  /// home顶部背景
+  static final String homeTopBg = "assets/images/ic_homt_top_bg.png";
+  static final String homeTop1 = "assets/images/ic_top_1.png";
+  static final String homeTop2 = "assets/images/ic_top_2.png";
+  static final String homeTop3 = "assets/images/ic_top_3.png";
+
 }

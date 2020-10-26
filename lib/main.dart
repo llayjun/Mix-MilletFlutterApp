@@ -7,6 +7,7 @@ import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,8 @@ void main() async{
   await SpUtil().init();
   /// 初始化刷新
   await initRefresh();
+  SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor:Colors.transparent);
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   runApp(MyApp());
 }
 
@@ -55,6 +58,7 @@ class MyApp extends StatelessWidget {
     ],
       child: MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor:Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -89,7 +93,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     /// 初始化尺寸
     Screen.init(context, 1080, 1920);
-    return LoginUi();
+    return MainPage();
   }
 
 }

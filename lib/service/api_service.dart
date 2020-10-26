@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:MilletFlutterApp/bean/banner_image_bean.dart';
 import 'package:MilletFlutterApp/bean/base/base_list_bean.dart';
 import 'package:MilletFlutterApp/bean/register_user_bean.dart';
 import 'package:MilletFlutterApp/net/http_manager.dart';
@@ -66,6 +67,23 @@ class ApiService {
         successCallback: (value) {
           RegisterUserBean registerUserBean = RegisterUserBean.fromJson(json.decode(json.encode(value)));
           completer.complete(registerUserBean);
+        },
+        errorCallback: (value) {
+          completer.completeError(value.message);
+        },
+        tag: "");
+    return completer.future;
+  }
+
+  /// banner图
+  Future<List<BannerImageBean>> getBannerImageList() async {
+    Completer<List<BannerImageBean>> completer = Completer();
+    HttpManager().get(
+        url: "api/app/banner/getBannerList",
+        successCallback: (value) {
+          List responseJson = json.decode(json.encode(value));
+          List<BannerImageBean> modelTestList = responseJson.map((m) => new BannerImageBean.fromJson(m)).toList();
+          completer.complete(modelTestList);
         },
         errorCallback: (value) {
           completer.completeError(value.message);

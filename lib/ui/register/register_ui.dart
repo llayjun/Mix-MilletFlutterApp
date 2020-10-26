@@ -35,7 +35,7 @@ class _RegisterUiState extends State<RegisterUi> {
             return Scaffold(
               appBar: AppBar(leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: AppColors.color_333333,), onPressed: () {
                 Navigator.pop(context);
-              },), shadowColor: Colors.transparent, backgroundColor: AppColors.color_FFFFFF, title: Text("注册", style: TextStyle(color: AppColors.color_333333,),), centerTitle: true,),
+              },), shadowColor: Colors.transparent, backgroundColor: AppColors.color_FFFFFF, title: Text("注册账号", style: TextStyle(color: AppColors.color_333333,),), centerTitle: true,),
               backgroundColor: AppColors.color_FFFFFF,
               body: Container(
                 padding: EdgeInsets.only(top: Screen.h(115), left: Screen.w(86), right: Screen.w(86)),
