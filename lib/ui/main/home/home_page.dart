@@ -25,10 +25,9 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return LoadingContainer<HomeVModel>(
         onModelReady: (model) {
-          // model.getBannerList(context);
-          model.bannerList.add(BannerImageBean(id: "1", imageUrl: Constant.TestImage));
-          model.bannerList.add(BannerImageBean(id: "1", imageUrl: Constant.TestImage));
-          model.bannerList.add(BannerImageBean(id: "1", imageUrl: Constant.TestImage));
+          model.getBannerList(context);
+          model.getMerchantList(context);
+          model.getMerchantTaskList(context);
           model.setSuccess();
         },
         successChild: (data) {
@@ -88,7 +87,9 @@ class HomePageState extends State<HomePage> {
                     ),
                   ),
                   topTask,
-                  itemTitle("推荐企业"),
+                  itemTitle("推荐企业", () {
+
+                  }),
                   Container(
                     margin: EdgeInsets.all(Screen.w(45)),
                     height: Screen.h(300),
@@ -96,24 +97,26 @@ class HomePageState extends State<HomePage> {
                     alignment: Alignment.centerLeft,
                     child: ListView.separated(
                       itemBuilder: (context, index) {
-                        return itemRecommend(AppImages.homeTop1, "肯德基", "累计128个任务");
+                        return itemRecommend("${data.merchantItemList[index].merchantLogo?? ""}", "${data.merchantItemList[index].merchantName?? ""}", "累计${data.merchantItemList[index].merchantTaskNum?? 0}个任务");
                       },
                       separatorBuilder: (context, index) {
                         return SizeDivider(width: Screen.h(30));
                       },
-                      itemCount: 5,
+                      itemCount: data.merchantItemList.length?? 0,
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,),
                   ),
-                  itemTitle("推荐任务"),
+                  itemTitle("推荐任务", () {
+
+                  }),
                   ListView.separated(
                     itemBuilder: (context, index) {
-                      return _itemRecommendTask(AppImages.homeTop1, "肯德基", "描述", "累计128个任务", "11");
+                      return _itemRecommendTask("${data.merchantTaskItemList[index].merchantLogo?? ""}", "${data.merchantTaskItemList[index].merchantTaskName?? ""}", "${data.merchantTaskItemList[index].merchantTaskDesc?? ""}", "${data.merchantTaskItemList[index].merchantName?? ""}", "${data.merchantTaskItemList[index].merchantTaskUnitPrice?? 0}");
                     },
                     separatorBuilder: (context, index) {
                       return SizeDivider(width: Screen.h(30));
                     },
-                    itemCount: 5,
+                    itemCount: data.merchantTaskItemList.length?? 0,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,),
@@ -162,17 +165,18 @@ class HomePageState extends State<HomePage> {
       ),
   );
 
-  Widget itemTitle(String title) => Container(
+  Widget itemTitle(String title, GestureTapCallback callback) => Container(
     padding: EdgeInsets.only(left: Screen.w(45), right: Screen.w(45)),
     child: Row(
       children: [
-        Text("$title", style: TextStyle(color: AppColors.color_333333, fontSize: Screen.sp(46), fontWeight: FontWeight.bold)),
+        Expanded(child: Text("$title", style: TextStyle(color: AppColors.color_333333, fontSize: Screen.sp(46), fontWeight: FontWeight.bold)),),
+        GestureDetector(child: Text("查看更多", style: TextStyle(color: AppColors.color_333333, fontSize: Screen.sp(35))), onTap: callback,)
       ],
     ),
   );
 
   /// 推荐企业
-  Widget itemRecommend(String image, String title, String content) => Container(
+  Widget itemRecommend(String imageUrl, String title, String content) => Container(
     width: Screen.w(346),
     padding: EdgeInsets.all(Screen.w(45)),
     color: AppColors.color_f8f8f8,
@@ -185,7 +189,7 @@ class HomePageState extends State<HomePage> {
           height: Screen.w(138),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(Screen.w(14)),
               color: AppColors.color_FFFFFF),
-          child: ClipRRect(child: Image(image: ExactAssetImage(image), fit: BoxFit.cover), borderRadius: BorderRadius.circular(Screen.w(14)),),
+          child: ClipRRect(child: Image(image: NetworkImage(imageUrl), fit: BoxFit.cover), borderRadius: BorderRadius.circular(Screen.w(14)),),
         ),
         SizeDivider(height: Screen.h(14)),
         Text(title, style: TextStyle(color: AppColors.color_333333, fontSize: Screen.sp(35), fontWeight: FontWeight.bold)),
@@ -195,14 +199,14 @@ class HomePageState extends State<HomePage> {
   );
 
   /// 推荐任务
-  Widget _itemRecommendTask(String image, String taskName, String taskDesc,  String merchantName, String unitPrice) {
+  Widget _itemRecommendTask(String imageUrl, String taskName, String taskDesc,  String merchantName, String unitPrice) {
     return Container(
       color: Colors.white,
       padding: EdgeInsets.all(10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(borderRadius: BorderRadius.circular(5), child: Image.network("${image??Constant.TestImage}", width: 60, height: 60, fit: BoxFit.fill,),),
+          ClipRRect(borderRadius: BorderRadius.circular(5), child: Image.network(imageUrl, width: 60, height: 60, fit: BoxFit.cover,),),
           Expanded(
             child:Padding(
               padding: const EdgeInsets.only(left: 10),
