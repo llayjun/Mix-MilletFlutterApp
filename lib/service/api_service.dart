@@ -140,6 +140,35 @@ class ApiService {
     return completer.future;
   }
 
+  /// 企业任务列表分页
+  Future<BaseListBean<MerchantTaskItemBean>> getMerchantTaskListPage({int pageNum, int pageSize = 4, String content = ""}) async {
+    Map<String, dynamic> params = new Map();
+    if(pageNum != null) {
+      params['pageNum'] = pageNum;
+    }
+    if(pageSize != null) {
+      params['pageSize'] = pageSize;
+    }
+    if(!TextUtil.isEmpty(content)) {
+      params['content'] = content;
+    }
+    Completer<BaseListBean<MerchantTaskItemBean>> completer = Completer();
+    HttpManager().post(
+        url: "api/app/task/getMerchantTaskListPage",
+        data: params,
+        successCallback: (value) {
+          Map map = json.decode(json.encode(value));
+          BaseListBean baseListBean = BaseListBean.fromJson(map);
+          List<MerchantTaskItemBean> modelTestList = baseListBean.records.map((m) => new MerchantTaskItemBean.fromJson(m)).toList();
+          completer.complete(BaseListBean(current: baseListBean.current, records: modelTestList, pages: baseListBean.pages, size: baseListBean.size, total: baseListBean.total));
+        },
+        errorCallback: (value) {
+          completer.completeError(value.message);
+        },
+        tag: "");
+    return completer.future;
+  }
+
 
 
 }

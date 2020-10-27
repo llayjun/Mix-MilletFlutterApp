@@ -3,7 +3,7 @@ import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget headView(BuildContext context) => AppBar(
+Widget headView(BuildContext context, String title) => AppBar(
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,
@@ -15,7 +15,7 @@ Widget headView(BuildContext context) => AppBar(
       shadowColor: Colors.transparent,
       backgroundColor: AppColors.color_FFFFFF,
       title: Text(
-        "企业",
+        "$title",
         style: TextStyle(color: AppColors.color_333333, fontWeight: FontWeight.bold),
       ),
       centerTitle: true,

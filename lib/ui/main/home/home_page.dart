@@ -15,6 +15,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+import 'merchant_task_more.dart';
+
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -109,14 +111,14 @@ class HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,),
                   ),
                   itemTitle("推荐任务", () {
-
+                    NavigatorUtil.push(context, MerchantTaskMorePage());
                   }),
                   ListView.separated(
                     itemBuilder: (context, index) {
                       return _itemRecommendTask("${data.merchantTaskItemList[index].merchantLogo?? ""}", "${data.merchantTaskItemList[index].merchantTaskName?? ""}", "${data.merchantTaskItemList[index].merchantTaskDesc?? ""}", "${data.merchantTaskItemList[index].merchantName?? ""}", "${data.merchantTaskItemList[index].merchantTaskUnitPrice?? 0}");
                     },
                     separatorBuilder: (context, index) {
-                      return SizeDivider(width: Screen.h(30));
+                      return Container(height: Screen.h(2), color: AppColors.color_f8f8f8);
                     },
                     itemCount: data.merchantTaskItemList.length?? 0,
                     shrinkWrap: true,

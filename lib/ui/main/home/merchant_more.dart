@@ -42,7 +42,7 @@ class _MerchantMorePageState extends State<MerchantMorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.color_FFFFFF,
-      appBar: headView(context),
+      appBar: headView(context, "企业"),
       body: FutureBuilder<BaseListBean<MerchantItemBean>>(
         future: future,
         builder: (context, snap) {
