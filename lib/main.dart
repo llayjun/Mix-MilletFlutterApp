@@ -97,7 +97,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     /// 初始化尺寸
     Screen.init(context, 1080, 1920);
-    return MainPage();
+    return LoginUi();
   }
 
 }

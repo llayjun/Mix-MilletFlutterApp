@@ -4,6 +4,7 @@ import 'package:MilletFlutterApp/ui/register/register_vm.dart';
 import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
+import 'package:MilletFlutterApp/widget/head_view_widget.dart';
 import 'package:MilletFlutterApp/widget/round_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,9 +34,7 @@ class _RegisterUiState extends State<RegisterUi> {
         child: Consumer<RegisterVModel>(
           builder: (context, model, child) {
             return Scaffold(
-              appBar: AppBar(leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: AppColors.color_333333,), onPressed: () {
-                Navigator.pop(context);
-              },), shadowColor: Colors.transparent, backgroundColor: AppColors.color_FFFFFF, title: Text("注册账号", style: TextStyle(color: AppColors.color_333333,),), centerTitle: true,),
+              appBar: headView(context, "注册账号"),
               backgroundColor: AppColors.color_FFFFFF,
               body: Container(
                 padding: EdgeInsets.only(top: Screen.h(115), left: Screen.w(86), right: Screen.w(86)),

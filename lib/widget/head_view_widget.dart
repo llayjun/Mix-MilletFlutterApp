@@ -16,7 +16,7 @@ Widget headView(BuildContext context, String title) => AppBar(
       backgroundColor: AppColors.color_FFFFFF,
       title: Text(
         "$title",
-        style: TextStyle(color: AppColors.color_333333, fontWeight: FontWeight.bold),
+        style: TextStyle(color: AppColors.color_333333),
       ),
       centerTitle: true,
     );
