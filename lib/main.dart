@@ -1,6 +1,7 @@
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
 import 'package:MilletFlutterApp/ui/login/login_vm.dart';
+import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
 import 'package:MilletFlutterApp/ui/main/main_page.dart';
 import 'package:MilletFlutterApp/ui/register/register_ui.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => LoginUi(),
         "/register": (context) => RegisterUi(),
         "/home": (context) => MainPage(),
+        "/merchantMore": (context) => MerchantMorePage(),
       },
       locale: const Locale('zh'),
       localizationsDelegates: [

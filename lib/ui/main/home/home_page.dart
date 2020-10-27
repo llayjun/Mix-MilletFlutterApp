@@ -3,6 +3,8 @@ import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/constant/app_images.dart';
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/main/home/home_vm.dart';
+import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
+import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/base/loading_container.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
@@ -88,7 +90,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   topTask,
                   itemTitle("推荐企业", () {
-
+                    NavigatorUtil.push(context, MerchantMorePage());
                   }),
                   Container(
                     margin: EdgeInsets.all(Screen.w(45)),

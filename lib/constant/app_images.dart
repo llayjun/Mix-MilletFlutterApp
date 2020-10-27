@@ -5,6 +5,8 @@ class AppImages {
   /// 登录界面
   static const String login_top_logo = "assets/images/ic_login_top_logo.png";
 
+  /// 返回图标
+  static const String ic_black_back = "assets/images/ic_black_back.png";
   /// 主页
   /// 主页图标
   static final String assetsHomeActive = 'assets/images/select-home.png';
