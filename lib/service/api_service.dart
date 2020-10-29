@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:MilletFlutterApp/bean/banner_image_bean.dart';
 import 'package:MilletFlutterApp/bean/base/base_list_bean.dart';
+import 'package:MilletFlutterApp/bean/merchant_detail_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_item_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_task_item_bean.dart';
 import 'package:MilletFlutterApp/bean/register_user_bean.dart';
@@ -86,6 +87,27 @@ class ApiService {
           List responseJson = json.decode(json.encode(value));
           List<MerchantItemBean> modelTestList = responseJson.map((m) => new MerchantItemBean.fromJson(m)).toList();
           completer.complete(modelTestList);
+        },
+        errorCallback: (value) {
+          completer.completeError(value.message);
+        },
+        tag: "");
+    return completer.future;
+  }
+
+  /// 企业详情
+  Future<MerchantDetailBean> getMerchantDetail(String merchantId) async {
+    Map<String, dynamic> data = new Map();
+    if(!TextUtil.isEmpty(merchantId)) {
+      data['merchantId'] = merchantId;
+    }
+    Completer<MerchantDetailBean> completer = Completer();
+    HttpManager().post(
+        url: "api/app/merchant/getMerchantDetail",
+        data: data,
+        successCallback: (value) {
+          MerchantDetailBean merchantDetailBean = MerchantDetailBean.fromJson(json.decode(json.encode(value)));
+          completer.complete(merchantDetailBean);
         },
         errorCallback: (value) {
           completer.completeError(value.message);

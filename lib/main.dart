@@ -4,6 +4,7 @@ import 'package:MilletFlutterApp/ui/login/login_vm.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_task_more.dart';
 import 'package:MilletFlutterApp/ui/main/main_page.dart';
+import 'package:MilletFlutterApp/ui/merchant_detail/merchant_detail_page.dart';
 import 'package:MilletFlutterApp/ui/register/register_ui.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
         "/home": (context) => MainPage(),
         "/merchantMore": (context) => MerchantMorePage(),
         "/merchantTaskMore": (context) => MerchantTaskMorePage(),
+        "/merchantDetail": (context) => MerchantDetailPage(),
       },
       locale: const Locale('zh'),
       localizationsDelegates: [

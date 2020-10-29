@@ -4,6 +4,7 @@ import 'package:MilletFlutterApp/constant/app_images.dart';
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/main/home/home_vm.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
+import 'package:MilletFlutterApp/ui/merchant_detail/merchant_detail_page.dart';
 import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/base/loading_container.dart';
@@ -101,7 +102,12 @@ class HomePageState extends State<HomePage> {
                     alignment: Alignment.centerLeft,
                     child: ListView.separated(
                       itemBuilder: (context, index) {
-                        return itemRecommend("${data.merchantItemList[index].merchantLogo?? ""}", "${data.merchantItemList[index].merchantName?? ""}", "累计${data.merchantItemList[index].merchantTaskNum?? 0}个任务");
+                        return GestureDetector(
+                          child: itemRecommend("${data.merchantItemList[index].merchantLogo?? ""}", "${data.merchantItemList[index].merchantName?? ""}", "累计${data.merchantItemList[index].merchantTaskNum?? 0}个任务"),
+                          onTap: () {
+                            NavigatorUtil.push(context, MerchantDetailPage(merchantId: "${data?.merchantItemList[index]?.id?? ""}",));
+                          },
+                        );
                       },
                       separatorBuilder: (context, index) {
                         return SizeDivider(width: Screen.h(30));
@@ -149,9 +155,15 @@ class HomePageState extends State<HomePage> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        itemTop(AppImages.homeTop1, "优质任务", "各种高质量的任务"),
-        itemTop(AppImages.homeTop2, "高薪兼职", "有着丰厚报酬"),
-        itemTop(AppImages.homeTop3, "企业任务", "合作企业发布的任务"),
+        GestureDetector(child: itemTop(AppImages.homeTop1, "优质任务", "各种高质量的任务"), onTap: () {
+          NavigatorUtil.push(context, MerchantTaskMorePage());
+        },),
+        GestureDetector(child: itemTop(AppImages.homeTop2, "高薪兼职", "有着丰厚报酬"), onTap: () {
+          NavigatorUtil.push(context, MerchantMorePage());
+        },),
+        GestureDetector(child: itemTop(AppImages.homeTop3, "企业任务", "合作企业发布的任务"), onTap: () {
+          NavigatorUtil.push(context, MerchantTaskMorePage());
+        },),
       ],
     ),
   );
