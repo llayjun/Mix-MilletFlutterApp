@@ -1,10 +1,13 @@
 import 'package:MilletFlutterApp/bean/merchant_detail_bean.dart';
 import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/service/api_service.dart';
+import 'package:MilletFlutterApp/ui/task_detail_page/task_detail_page.dart';
+import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
 import 'package:MilletFlutterApp/widget/head_view_widget.dart';
 import 'package:MilletFlutterApp/widget/icon_text.dart';
+import 'package:MilletFlutterApp/widget/page/photo_gallery_view_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +30,7 @@ class _MerchantDetailPageState extends State<MerchantDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: headView(context, ""),
+      appBar: headView(context, "企业详情"),
       backgroundColor: AppColors.color_FFFFFF,
       body: FutureBuilder<MerchantDetailBean>(
         future: getMerchantDetail("${widget.merchantId}"),
@@ -65,10 +68,15 @@ class _MerchantDetailPageState extends State<MerchantDetailPage> {
                           Padding(padding: EdgeInsets.only(top: Screen.h(45), bottom: Screen.h(20)), child: Text("任务列表（${bean.merchantTaskNum}）", style: TextStyle(fontSize: Screen.sp(40), fontWeight: FontWeight.bold, color: AppColors.color_333333),),),
                           ListView.separated(
                             itemBuilder: (context, index) {
-                              return taskItem(bean?.merchantTaskList[index]?.merchantTaskName?? ""
-                                  , bean?.merchantTaskList[index]?.taskLocation?? ""
-                                  , bean?.merchantTaskList[index]?.createdTime?? ""
-                                  , bean?.merchantTaskList[index]?.merchantTaskUnitPrice?.toString()?? "");
+                              return GestureDetector(
+                                child: taskItem(bean?.merchantTaskList[index]?.merchantTaskName?? ""
+                                    , bean?.merchantTaskList[index]?.taskLocation?? ""
+                                    , bean?.merchantTaskList[index]?.createdTime?? ""
+                                    , bean?.merchantTaskList[index]?.merchantTaskUnitPrice?.toString()?? ""),
+                                onTap: () {
+                                  NavigatorUtil.push(context, TaskDetailPage(taskId: "${bean?.merchantTaskList[index]?.id?? ""}",));
+                                },
+                              );
                             },
                             itemCount: bean?.merchantTaskList?.length?? 0,
                             shrinkWrap: true,
@@ -122,11 +130,19 @@ class _MerchantDetailPageState extends State<MerchantDetailPage> {
     height: Screen.h(432),
     child: Swiper(
       itemBuilder: (BuildContext context,int index){
-        return Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(
-              image: NetworkImage("${list[index].picture?? ""}"),
-              fit: BoxFit.cover
-          )),
+        return GestureDetector(
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(
+                image: NetworkImage("${list[index].picture?? ""}"),
+                fit: BoxFit.cover
+            )),
+          ),
+          onTap: () {
+            NavigatorUtil.push(context, PhotoGalleryPage(
+              index: index,
+              photoList: list.map((e) => e.picture).toList(),
+            ));
+          },
         );
       },
       loop: true,

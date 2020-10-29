@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'constant/config.dart';
 import 'net/http_manager.dart';
 import 'net/lcfarm_log_interceptor.dart';
+import 'ui/task_detail_page/task_detail_page.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
         "/merchantMore": (context) => MerchantMorePage(),
         "/merchantTaskMore": (context) => MerchantTaskMorePage(),
         "/merchantDetail": (context) => MerchantDetailPage(),
+        "/taskDetail": (context) => TaskDetailPage(),
       },
       locale: const Locale('zh'),
       localizationsDelegates: [

@@ -2,6 +2,8 @@ import 'package:MilletFlutterApp/bean/base/base_list_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_task_item_bean.dart';
 import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/service/api_service.dart';
+import 'package:MilletFlutterApp/ui/task_detail_page/task_detail_page.dart';
+import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
 import 'package:MilletFlutterApp/widget/head_view_widget.dart';
@@ -66,7 +68,7 @@ class _MerchantTaskMorePageState extends State<MerchantTaskMorePage> {
                   },
                   itemBuilder: (context, index) {
                     return InkWell(child: _itemRecommendTask("${merchantTaskList[index].merchantLogo?? ""}", "${merchantTaskList[index].merchantTaskName?? ""}", "${merchantTaskList[index].merchantTaskDesc?? ""}", "${merchantTaskList[index].merchantName?? ""}", "${merchantTaskList[index].merchantTaskUnitPrice?? 0}"), onTap: () {
-
+                      NavigatorUtil.push(context, TaskDetailPage(taskId: "${merchantTaskList[index]?.id?? ""}",));
                     },);
                   },
                   itemCount: merchantTaskList?.length??0,

@@ -2,6 +2,8 @@ import 'package:MilletFlutterApp/bean/base/base_list_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_item_bean.dart';
 import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/service/api_service.dart';
+import 'package:MilletFlutterApp/ui/merchant_detail/merchant_detail_page.dart';
+import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
 import 'package:MilletFlutterApp/widget/head_view_widget.dart';
@@ -74,7 +76,7 @@ class _MerchantMorePageState extends State<MerchantMorePage> {
                       childAspectRatio: 1.5),
                   itemBuilder: (context, index) {
                     return InkWell(child: itemRecommend("${merchantList[index].merchantLogo??""}", "${merchantList[index].merchantName??""}", "累计${merchantList[index].merchantTaskNum?? 0}个任务"), onTap: () {
-
+                      NavigatorUtil.push(context, MerchantDetailPage(merchantId: "${merchantList[index]?.id?? ""}",));
                     },);
                   },
                   itemCount: merchantList?.length??0,

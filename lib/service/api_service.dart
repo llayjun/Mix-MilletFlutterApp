@@ -7,6 +7,7 @@ import 'package:MilletFlutterApp/bean/merchant_detail_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_item_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_task_item_bean.dart';
 import 'package:MilletFlutterApp/bean/register_user_bean.dart';
+import 'package:MilletFlutterApp/bean/task_detail_bean.dart';
 import 'package:MilletFlutterApp/net/http_manager.dart';
 import 'package:MilletFlutterApp/test/article_bean.dart';
 import 'package:MilletFlutterApp/test/article_item_bean.dart';
@@ -125,6 +126,27 @@ class ApiService {
           List responseJson = json.decode(json.encode(value));
           List<MerchantTaskItemBean> modelTestList = responseJson.map((m) => new MerchantTaskItemBean.fromJson(m)).toList();
           completer.complete(modelTestList);
+        },
+        errorCallback: (value) {
+          completer.completeError(value.message);
+        },
+        tag: "");
+    return completer.future;
+  }
+
+  /// 企业任务详情
+  Future<TaskDetailBean> getTaskDetail(String taskId) async {
+    Map<String, dynamic> data = new Map();
+    if(!TextUtil.isEmpty(taskId)) {
+      data['merchantTaskId'] = taskId;
+    }
+    Completer<TaskDetailBean> completer = Completer();
+    HttpManager().post(
+        url: "api/app/task/getMerchantTaskDetail",
+        data: data,
+        successCallback: (value) {
+          TaskDetailBean taskDetailBean = TaskDetailBean.fromJson(json.decode(json.encode(value)));
+          completer.complete(taskDetailBean);
         },
         errorCallback: (value) {
           completer.completeError(value.message);

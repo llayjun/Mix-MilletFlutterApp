@@ -5,11 +5,13 @@ import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/main/home/home_vm.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
 import 'package:MilletFlutterApp/ui/merchant_detail/merchant_detail_page.dart';
+import 'package:MilletFlutterApp/ui/task_detail_page/task_detail_page.dart';
 import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/base/loading_container.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
 import 'package:MilletFlutterApp/widget/icon_text.dart';
+import 'package:MilletFlutterApp/widget/page/photo_gallery_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -66,11 +68,19 @@ class HomePageState extends State<HomePage> {
                           height: Screen.h(432),
                           child: Swiper(
                             itemBuilder: (BuildContext context,int index){
-                              return Container(
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(
-                                  image: NetworkImage("${data.bannerList[index].imageUrl}"),
-                                  fit: BoxFit.cover
-                                )),
+                              return GestureDetector(
+                                child: Container(
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(
+                                      image: NetworkImage("${data.bannerList[index].imageUrl}"),
+                                      fit: BoxFit.cover
+                                  )),
+                                ),
+                                onTap: () {
+                                  NavigatorUtil.push(context, PhotoGalleryPage(
+                                    index: index,
+                                    photoList: data.bannerList.map((e) => e.imageUrl).toList(),
+                                  ));
+                                },
                               );
                             },
                             loop: true,
@@ -121,7 +131,12 @@ class HomePageState extends State<HomePage> {
                   }),
                   ListView.separated(
                     itemBuilder: (context, index) {
-                      return _itemRecommendTask("${data.merchantTaskItemList[index].merchantLogo?? ""}", "${data.merchantTaskItemList[index].merchantTaskName?? ""}", "${data.merchantTaskItemList[index].merchantTaskDesc?? ""}", "${data.merchantTaskItemList[index].merchantName?? ""}", "${data.merchantTaskItemList[index].merchantTaskUnitPrice?? 0}");
+                      return GestureDetector(
+                        child: _itemRecommendTask("${data.merchantTaskItemList[index].merchantLogo?? ""}", "${data.merchantTaskItemList[index].merchantTaskName?? ""}", "${data.merchantTaskItemList[index].merchantTaskDesc?? ""}", "${data.merchantTaskItemList[index].merchantName?? ""}", "${data.merchantTaskItemList[index].merchantTaskUnitPrice?? 0}"),
+                        onTap: () {
+                          NavigatorUtil.push(context, TaskDetailPage(taskId: "${data?.merchantTaskItemList[index]?.id?? ""}",));
+                        },
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return Container(height: Screen.h(2), color: AppColors.color_f8f8f8);
@@ -232,7 +247,7 @@ class HomePageState extends State<HomePage> {
                 children: [
                   Text("$taskName", style: TextStyle(fontSize: 14, color: Colors.black)),
                   SizedBox(height: 10,),
-                  Container(alignment: Alignment.centerLeft, child: Padding(padding: const EdgeInsets.all(5.0), child: Text("$taskDesc", style: TextStyle(fontSize: 10, color: AppColors.color_999999), overflow: TextOverflow.ellipsis, maxLines: 3,),), width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: AppColors.color_f8f8f8),),
+                  Container(alignment: Alignment.centerLeft, child: Padding(padding: const EdgeInsets.all(5.0), child: Text("$taskDesc", style: TextStyle(fontSize: 10, color: AppColors.color_999999), overflow: TextOverflow.ellipsis, maxLines: 2,),), width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: AppColors.color_f8f8f8),),
                   SizedBox(height: 10,),
                   Row(children: [
                     Expanded(child: Text("$merchantName", style: TextStyle(fontSize: 12, color: Colors.black54),)),
