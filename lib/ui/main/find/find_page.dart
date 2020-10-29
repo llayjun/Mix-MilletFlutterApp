@@ -7,7 +7,11 @@ class FindPage extends StatefulWidget {
   }
 }
 
-class FindPageState extends State<FindPage> {
+class FindPageState extends State<FindPage> with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true; //必须重写
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

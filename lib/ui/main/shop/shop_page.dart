@@ -7,7 +7,11 @@ class ShopPage extends StatefulWidget {
   }
 }
 
-class ShopPageState extends State<ShopPage> {
+class ShopPageState extends State<ShopPage> with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true; //必须重写
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

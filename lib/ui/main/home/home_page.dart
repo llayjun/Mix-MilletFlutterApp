@@ -27,7 +27,11 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true; //必须重写
+
   @override
   Widget build(BuildContext context) {
     return LoadingContainer<HomeVModel>(
