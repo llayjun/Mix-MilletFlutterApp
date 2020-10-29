@@ -62,7 +62,7 @@ class _MerchantDetailPageState extends State<MerchantDetailPage> {
                           textItem("成立时间", "${bean.establishTime}"),
                           textItem("注册资金", "${bean.funds}"),
                           textItem("经营范围", "${bean.merchantRange}"),
-                          Padding(padding: EdgeInsets.only(top: Screen.h(45), bottom: Screen.h(20)), child: Text("基本信息（${bean.merchantTaskNum}）", style: TextStyle(fontSize: Screen.sp(40), fontWeight: FontWeight.bold, color: AppColors.color_333333),),),
+                          Padding(padding: EdgeInsets.only(top: Screen.h(45), bottom: Screen.h(20)), child: Text("任务列表（${bean.merchantTaskNum}）", style: TextStyle(fontSize: Screen.sp(40), fontWeight: FontWeight.bold, color: AppColors.color_333333),),),
                           ListView.separated(
                             itemBuilder: (context, index) {
                               return taskItem(bean?.merchantTaskList[index]?.merchantTaskName?? ""

@@ -17,6 +17,16 @@ class LoginVModel extends BaseVModel {
     notifyListeners();
   }
 
+  /// 是否可以点击登陆按钮
+  bool _canClickLogin = false;
+
+  bool get canClickLogin => _canClickLogin;
+
+  set canClickLogin(bool value) {
+    _canClickLogin = value;
+    notifyListeners();
+  }
+
   @override
   void onDataReady() {
 
@@ -38,7 +48,7 @@ class LoginVModel extends BaseVModel {
     }
     apiService.login(name, pass).then((value) => {
       notifyListeners(),
-      NavigatorUtil.push(context, MainPage())
+      NavigatorUtil.pushReplacementNamed(context, "/home")
     }).catchError((value) {
       Fluttertoast.showToast(msg: value);
     });

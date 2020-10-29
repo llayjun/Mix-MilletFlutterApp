@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// 这边的MultiProvider是设置整个app的状态
     return MultiProvider(providers: [
-      ChangeNotifierProvider<LoginVModel>.value(value: LoginVModel()),
+      // ChangeNotifierProvider<LoginVModel>.value(value: LoginVModel()),
     ],
       child: MaterialApp(
       title: 'Flutter Demo',

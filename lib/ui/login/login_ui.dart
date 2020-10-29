@@ -24,6 +24,15 @@ class _LoginUiState extends State<LoginUi> {
     _passController = TextEditingController();
   }
 
+  /// 判断是否可以登录按钮
+  _canClickButton(LoginVModel model) {
+    if(_nameController.value.text.isNotEmpty && _passController.value.text.isNotEmpty && model.check) {
+      model.canClickLogin = true;
+    } else {
+      model.canClickLogin = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LoginVModel>.value(
@@ -52,6 +61,9 @@ class _LoginUiState extends State<LoginUi> {
                       validator: (value) {
                         return value.length > 11 ? "账号长度不能超过11位" : null;
                       },
+                      onChanged: (value) {
+                        _canClickButton(model);
+                      },
                       autovalidate: true,
                       controller: _nameController,
                       decoration: InputDecoration(
@@ -66,6 +78,9 @@ class _LoginUiState extends State<LoginUi> {
                     TextFormField(
                       validator: (value) {
                         return value.length > 6 ? "密码长度不能超过6位" : null;
+                      },
+                      onChanged: (value) {
+                        _canClickButton(model);
                       },
                       autovalidate: true,
                       controller: _passController,
@@ -82,6 +97,7 @@ class _LoginUiState extends State<LoginUi> {
                       children: [
                         RoundCheckBox(value: model.check, onChanged: (value) {
                           model.check = value;
+                          _canClickButton(model);
                         }),
                         SizeDivider(width: Screen.w(20)),
                         Expanded(child: Text("我已阅读并同意《蓝吧社区隐私政策》及《蓝吧社区用户服务协议》", style: TextStyle(color: AppColors.color_999999, fontSize: Screen.sp(35),)),),
@@ -89,17 +105,20 @@ class _LoginUiState extends State<LoginUi> {
                     SizeDivider(height: Screen.h(120)),
 
                     GestureDetector(
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: Screen.w(),
-                        height: Screen.h(130),
-                        child: Text("立即登录", style: TextStyle(color: AppColors.color_FFFFFF, fontSize: Screen.sp(46)),),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14.0),
-                            gradient: LinearGradient(colors: [
-                              AppColors.color_4a73ff,
-                              AppColors.color_4a73ff
-                            ])),
+                      child: Opacity(
+                        opacity: model.canClickLogin?1: 0.6,
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: Screen.w(),
+                          height: Screen.h(130),
+                          child: Text("立即登录", style: TextStyle(color: AppColors.color_FFFFFF, fontSize: Screen.sp(46)),),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14.0),
+                              gradient: LinearGradient(colors: [
+                                AppColors.color_4a73ff,
+                                AppColors.color_4a73ff
+                              ])),
+                        ),
                       ),
                       onTap: () {
                         model.login(context, _nameController.text, _passController.text);
