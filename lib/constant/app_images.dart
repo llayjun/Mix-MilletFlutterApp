@@ -27,4 +27,20 @@ class AppImages {
   static final String homeTop2 = "assets/images/ic_top_2.png";
   static final String homeTop3 = "assets/images/ic_top_3.png";
 
+  /// 我的界面
+  static final String mySetting = "assets/images/ic_my_setting.png";
+  static final String myChangeRole = "assets/images/ic_change_role.png";
+  static final String myTop1 = "assets/images/ic_my_top_1.png";
+  static final String myTop2 = "assets/images/ic_my_top_2.png";
+  static final String myTop3 = "assets/images/ic_my_top_3.png";
+  static final String myTop4 = "assets/images/ic_my_top_4.png";
+  static final String myApply1 = "assets/images/ic_apply_1.png";
+  static final String myApply2 = "assets/images/ic_apply_2.png";
+  static final String myApply3 = "assets/images/ic_apply_3.png";
+  static final String myApply4 = "assets/images/ic_apply_4.png";
+  static final String myApply5 = "assets/images/ic_apply_5.png";
+  static final String myHelp1 = "assets/images/ic_help_1.png";
+  static final String myHelp2 = "assets/images/ic_help_2.png";
+  static final String myHelp3 = "assets/images/ic_help_3.png";
+
 }

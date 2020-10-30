@@ -82,6 +82,21 @@ flutter:
     - assets/images/ic_top_1.png
     - assets/images/ic_top_2.png
     - assets/images/ic_top_3.png
+    - assets/images/ic_my_setting.png
+    - assets/images/ic_change_role.png
+    - assets/images/ic_apply_1.png
+    - assets/images/ic_apply_2.png
+    - assets/images/ic_apply_3.png
+    - assets/images/ic_apply_4.png
+    - assets/images/ic_apply_5.png
+    - assets/images/ic_help_1.png
+    - assets/images/ic_help_2.png
+    - assets/images/ic_help_3.png
+    - assets/images/ic_my_top_1.png
+    - assets/images/ic_my_top_2.png
+    - assets/images/ic_my_top_3.png
+    - assets/images/ic_my_top_4.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

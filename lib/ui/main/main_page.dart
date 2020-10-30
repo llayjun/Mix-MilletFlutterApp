@@ -1,6 +1,5 @@
 import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/constant/app_images.dart';
-import 'package:MilletFlutterApp/ui/main/find/find_page.dart';
 import 'package:MilletFlutterApp/ui/main/mine/mine_page.dart';
 import 'package:MilletFlutterApp/ui/main/shop/shop_page.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'home/home_page.dart';
+import 'work/work_page.dart';
 
 class MainPage extends StatefulWidget {
   int initPage;
@@ -43,7 +43,7 @@ class MainPageState extends State<MainPage> {
                   controller: _pageController,
                   children: <Widget>[
                     new HomePage(),
-                    new FindPage(),
+                    new WorkPage(),
                     new ShopPage(),
                     new MinePage(),
                   ],
