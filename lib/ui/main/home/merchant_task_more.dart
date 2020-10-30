@@ -125,7 +125,7 @@ class _MerchantTaskMorePageState extends State<MerchantTaskMorePage> {
                 children: [
                   Text("$taskName", style: TextStyle(fontSize: 14, color: Colors.black)),
                   SizedBox(height: 10,),
-                  Container(alignment: Alignment.centerLeft, child: Padding(padding: const EdgeInsets.all(5.0), child: Text("$taskDesc", style: TextStyle(fontSize: 10, color: AppColors.color_999999), overflow: TextOverflow.ellipsis, maxLines: 3,),), width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: AppColors.color_f8f8f8),),
+                  Container(alignment: Alignment.centerLeft, child: Padding(padding: const EdgeInsets.all(5.0), child: Text("$taskDesc", style: TextStyle(fontSize: 10, color: AppColors.color_999999), overflow: TextOverflow.ellipsis, maxLines: 2,),), width: double.infinity, decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: AppColors.color_f8f8f8),),
                   SizedBox(height: 10,),
                   Row(children: [
                     Expanded(child: Text("$merchantName", style: TextStyle(fontSize: 12, color: Colors.black54),)),
