@@ -51,7 +51,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        image: DecorationImage(image: NetworkImage('https://img.zcool.cn/community/0372d195ac1cd55a8012062e3b16810.jpg'), fit: BoxFit.cover),),
+                        image: DecorationImage(image: NetworkImage('https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=314202116,1401007204&fm=26&gp=0.jpg'), fit: BoxFit.cover),),
                     child: Column(
                       children: [
                         Padding(

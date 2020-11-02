@@ -3,7 +3,7 @@ class Constant {
   static final bool Debug = true;
 
   /// base url
-  static final String BaseUrl = "http://192.168.10.3:8084/";
+  static final String BaseUrl = "http://192.168.10.16:8084/";
   // static final String BaseUrl = "http://351x29514o.zicp.vip/"; /// 内网穿透
 
   /// test image url
