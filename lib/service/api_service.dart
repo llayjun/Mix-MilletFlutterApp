@@ -3,14 +3,17 @@ import 'dart:convert';
 
 import 'package:MilletFlutterApp/bean/banner_image_bean.dart';
 import 'package:MilletFlutterApp/bean/base/base_list_bean.dart';
+import 'package:MilletFlutterApp/bean/login_user_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_detail_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_item_bean.dart';
 import 'package:MilletFlutterApp/bean/merchant_task_item_bean.dart';
 import 'package:MilletFlutterApp/bean/register_user_bean.dart';
 import 'package:MilletFlutterApp/bean/task_detail_bean.dart';
+import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/net/http_manager.dart';
 import 'package:MilletFlutterApp/test/article_bean.dart';
 import 'package:MilletFlutterApp/test/article_item_bean.dart';
+import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:common_utils/common_utils.dart';
 
 class ApiService {
@@ -41,8 +44,8 @@ class ApiService {
   }
 
   /// 登录
-  Future<RegisterUserBean> login(String mobile, String passWord) async {
-    Completer<RegisterUserBean> completer = Completer();
+  Future<LoginUserBean> login(String mobile, String passWord) async {
+    Completer<LoginUserBean> completer = Completer();
     Map<String, dynamic> params = new Map();
     if(!TextUtil.isEmpty(mobile))
       params["mobile"] = mobile;
@@ -52,8 +55,11 @@ class ApiService {
         url: "api/app/users/userLogin",
         data: params,
         successCallback: (value) {
-          RegisterUserBean registerUserBean = RegisterUserBean.fromJson(json.decode(json.encode(value)));
-          completer.complete(registerUserBean);
+          LoginUserBean loginUserBean = LoginUserBean.fromJson(json.decode(json.encode(value)));
+          // 保存token，并刷新
+          SpUtil().putString(SpKeyUtil.TokenKey, loginUserBean.authorization?? "");
+          HttpManager().refreshToken();
+          completer.complete(loginUserBean);
         },
         errorCallback: (value) {
           completer.completeError(value.message);

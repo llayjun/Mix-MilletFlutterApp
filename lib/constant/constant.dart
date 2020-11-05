@@ -15,3 +15,7 @@ class Constant {
   static final int PAGE_SIZE_1000 = 1000; // 可以1000条
 
 }
+
+class SpKeyUtil {
+  static final String TokenKey = "TokenKey";
+}

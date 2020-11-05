@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
 import 'package:MilletFlutterApp/ui/login/login_vm.dart';
@@ -9,6 +11,7 @@ import 'package:MilletFlutterApp/ui/register/register_ui.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
+import 'package:common_utils/common_utils.dart' as text;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -25,10 +28,10 @@ void main() async{
   Config.fill(debug: Constant.Debug, dbName: "millet", apiUrl: Constant.BaseUrl);
   /// 初始化日志
   LogUtil.init(isDebug: Config.inst.debug, tag: "MilletTag");
-  /// 初始化网络
-  HttpManager().init(baseUrl: Config.inst.apiUrl, interceptors: [LcfarmLogInterceptor()]);
   /// 初始化sp
   await SpUtil().init();
+  /// 初始化网络
+  HttpManager().init(baseUrl: Config.inst.apiUrl, interceptors: [LcfarmLogInterceptor()], headers: {HttpHeaders.authorizationHeader: SpUtil().getString(SpKeyUtil.TokenKey)});
   /// 初始化刷新
   await initRefresh();
   SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor:Colors.transparent);
@@ -101,7 +104,10 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     /// 初始化尺寸
     Screen.init(context, 1080, 1920);
-    return LoginUi();
+    if(text.TextUtil.isEmpty(SpUtil().getString(SpKeyUtil.TokenKey))) {
+      return LoginUi();
+    }
+    return MainPage();
   }
 
 }

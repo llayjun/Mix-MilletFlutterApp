@@ -1,7 +1,10 @@
 import 'dart:core';
+import 'dart:io';
 
 import 'package:MilletFlutterApp/bean/base/base_bean.dart';
+import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
+import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -72,15 +75,21 @@ class HttpManager {
       {String baseUrl,
       int connectTimeout,
       int receiveTimeout,
+      Map<String, dynamic> headers,
       List<Interceptor> interceptors}) {
     _client.options = _client.options.merge(
       baseUrl: baseUrl,
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
+      headers: headers,
     );
     if (interceptors != null && interceptors.isNotEmpty) {
       _client.interceptors..addAll(interceptors);
     }
+  }
+
+  void refreshToken () {
+    _client.options.headers.addAll({HttpHeaders.authorizationHeader: SpUtil().getString(SpKeyUtil.TokenKey)});
   }
 
   ///Get网络请求

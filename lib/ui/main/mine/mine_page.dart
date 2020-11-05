@@ -6,6 +6,7 @@ import 'package:MilletFlutterApp/widget/common_widget.dart';
 import 'package:MilletFlutterApp/widget/icon_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class MinePage extends StatefulWidget {
@@ -42,7 +43,12 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconText("切换角色", padding: EdgeInsets.only(right: Screen.w(20)), textAlign: TextAlign.center, icon: Icon(Icons.add_link), iconSize: Screen.sp(55), style: TextStyle(fontSize: Screen.sp(46), color: AppColors.color_FFFFFF,)),
-                            ImageIcon(AssetImage(AppImages.mySetting), color: AppColors.color_FFFFFF, size: Screen.sp(55),)
+                            GestureDetector(
+                              child: ImageIcon(AssetImage(AppImages.mySetting), color: AppColors.color_FFFFFF, size: Screen.sp(55),),
+                              onTap: () {
+                                _alertDialog();
+                              },
+                            )
                           ],
                         ),
                         SizeDivider(height: Screen.h(60)),
@@ -99,6 +105,31 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
         ),
       ),
     );
+  }
+
+  /// 退出登录弹窗
+  _alertDialog() async {
+    var alertDialogs = await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("提示"),
+            content: Text("确定要退出吗"),
+            actions: <Widget>[
+              FlatButton(
+                  child: Text("取消"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              FlatButton(
+                  child: Text("确定"),
+                  onPressed: () async {
+                    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                  }),
+            ],
+          );
+        });
+    return alertDialogs;
   }
 
   Widget get topContainer => Card(
