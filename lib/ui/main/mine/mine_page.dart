@@ -1,6 +1,8 @@
 import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/constant/app_images.dart';
 import 'package:MilletFlutterApp/constant/constant.dart';
+import 'package:MilletFlutterApp/ui/login/login_ui.dart';
+import 'package:MilletFlutterApp/util/navigator_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/widget/common_widget.dart';
 import 'package:MilletFlutterApp/widget/icon_text.dart';
@@ -124,7 +126,7 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
               FlatButton(
                   child: Text("确定"),
                   onPressed: () async {
-                    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                    NavigatorUtil.pushAndRemoveUtil(context, LoginUi(), (Route<dynamic> route) => false);
                   }),
             ],
           );
