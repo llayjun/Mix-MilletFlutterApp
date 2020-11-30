@@ -92,7 +92,6 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                                 },
                               );
                             },
-                            loop: true,
                             autoplay: true,
                             scrollDirection: Axis.horizontal,
                             itemCount: data.bannerList.length,

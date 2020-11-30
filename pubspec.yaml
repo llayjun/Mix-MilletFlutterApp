@@ -67,7 +67,12 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  # 自动生成图片地址，使用R访问的方式
   assets:
+  # assets-generator-begin
+  # assets/img/*
+    - assets/img/test_image.png
+  # assets-generator-end
     - assets/images/ic_black_back.png
     - assets/images/ic_login_top_logo.png
     - assets/images/gray-home.png
