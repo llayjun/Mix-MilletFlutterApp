@@ -2,6 +2,7 @@ import 'package:MilletFlutterApp/bean/banner_image_bean.dart';
 import 'package:MilletFlutterApp/constant/app_colors.dart';
 import 'package:MilletFlutterApp/constant/app_images.dart';
 import 'package:MilletFlutterApp/constant/constant.dart';
+import 'package:MilletFlutterApp/ui/article/article_page.dart';
 import 'package:MilletFlutterApp/ui/main/home/home_vm.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
 import 'package:MilletFlutterApp/ui/merchant_detail/merchant_detail_page.dart';
@@ -62,7 +63,12 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                               SizeDivider(width: Screen.h(30)),
                               Expanded(child: topSearch,),
                               SizeDivider(width: Screen.h(30)),
-                              Text("我的简历", style: TextStyle(color: AppColors.color_FFFFFF, fontSize: Screen.sp(46))),
+                              InkWell(
+                                child: Text("我的文章", style: TextStyle(color: AppColors.color_FFFFFF, fontSize: Screen.sp(46))),
+                                onTap: () {
+                                  NavigatorUtil.push(context, ArticlePage());
+                                },
+                              )
                             ],
                           ),
                         ),

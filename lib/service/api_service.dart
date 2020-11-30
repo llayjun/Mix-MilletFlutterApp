@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:MilletFlutterApp/bean/article_list_bean.dart';
+import 'package:MilletFlutterApp/bean/article_type_bean.dart';
 import 'package:MilletFlutterApp/bean/banner_image_bean.dart';
 import 'package:MilletFlutterApp/bean/base/base_list_bean.dart';
 import 'package:MilletFlutterApp/bean/login_user_bean.dart';
@@ -11,8 +13,6 @@ import 'package:MilletFlutterApp/bean/register_user_bean.dart';
 import 'package:MilletFlutterApp/bean/task_detail_bean.dart';
 import 'package:MilletFlutterApp/constant/constant.dart';
 import 'package:MilletFlutterApp/net/http_manager.dart';
-import 'package:MilletFlutterApp/test/article_bean.dart';
-import 'package:MilletFlutterApp/test/article_item_bean.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
 import 'package:common_utils/common_utils.dart';
 
@@ -77,6 +77,55 @@ class ApiService {
           List responseJson = json.decode(json.encode(value));
           List<BannerImageBean> modelTestList = responseJson.map((m) => new BannerImageBean.fromJson(m)).toList();
           completer.complete(modelTestList);
+        },
+        errorCallback: (value) {
+          completer.completeError(value.message);
+        },
+        tag: "");
+    return completer.future;
+  }
+
+  /// 文章类型
+  Future<List<ArticleTypeBean>> getArticleTypeList() async {
+    Completer<List<ArticleTypeBean>> completer = Completer();
+    HttpManager().get(
+        url: "api/app/articleType/getArticleTypeList",
+        successCallback: (value) {
+          List responseJson = json.decode(json.encode(value));
+          List<ArticleTypeBean> articleTypeList = responseJson.map((m) => new ArticleTypeBean.fromJson(m)).toList();
+          completer.complete(articleTypeList);
+        },
+        errorCallback: (value) {
+          completer.completeError(value.message);
+        },
+        tag: "");
+    return completer.future;
+  }
+
+  /// 文章列表分页
+  Future<BaseListBean<ArticleListBean>> getArticleListPage({int articleType = 0, int pageNum, int pageSize = 4, String content = ""}) async {
+    Map<String, dynamic> params = new Map();
+    if(articleType != null) {
+      params['articleType'] = articleType;
+    }
+    if(pageNum != null) {
+      params['pageNum'] = pageNum;
+    }
+    if(pageSize != null) {
+      params['pageSize'] = pageSize;
+    }
+    if(!TextUtil.isEmpty(content)) {
+      params['content'] = content;
+    }
+    Completer<BaseListBean<ArticleListBean>> completer = Completer();
+    HttpManager().post(
+        url: "api/app/article/getArticleList",
+        data: params,
+        successCallback: (value) {
+          Map map = json.decode(json.encode(value));
+          BaseListBean baseListBean = BaseListBean.fromJson(map);
+          List<ArticleListBean> modelTestList = baseListBean.records.map((m) => new ArticleListBean.fromJson(m)).toList();
+          completer.complete(BaseListBean(current: baseListBean.current, records: modelTestList, pages: baseListBean.pages, size: baseListBean.size, total: baseListBean.total));
         },
         errorCallback: (value) {
           completer.completeError(value.message);

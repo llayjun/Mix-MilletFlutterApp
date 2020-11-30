@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:MilletFlutterApp/constant/constant.dart';
+import 'package:MilletFlutterApp/ui/article/article_page.dart';
 import 'package:MilletFlutterApp/ui/login/login_ui.dart';
-import 'package:MilletFlutterApp/ui/login/login_vm.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_more.dart';
 import 'package:MilletFlutterApp/ui/main/home/merchant_task_more.dart';
 import 'package:MilletFlutterApp/ui/main/main_page.dart';
 import 'package:MilletFlutterApp/ui/merchant_detail/merchant_detail_page.dart';
 import 'package:MilletFlutterApp/ui/register/register_ui.dart';
+import 'package:MilletFlutterApp/ui/web_view/web_view_page.dart';
 import 'package:MilletFlutterApp/util/log_util.dart';
 import 'package:MilletFlutterApp/util/screen_util.dart';
 import 'package:MilletFlutterApp/util/sp_util.dart';
@@ -78,6 +79,8 @@ class MyApp extends StatelessWidget {
         "/merchantTaskMore": (context) => MerchantTaskMorePage(),
         "/merchantDetail": (context) => MerchantDetailPage(),
         "/taskDetail": (context) => TaskDetailPage(),
+        "/article": (context) => ArticlePage(),
+        "/webViewPage": (context) => WebViewPage(),
       },
       locale: const Locale('zh'),
       localizationsDelegates: [
