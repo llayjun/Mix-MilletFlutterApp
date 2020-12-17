@@ -37,9 +37,9 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   Widget build(BuildContext context) {
     return LoadingContainer<HomeVModel>(
         onModelReady: (model) {
-          model.getBannerList(context);
           model.getMerchantList(context);
           model.getMerchantTaskList(context);
+          model.getBannerList(context);
           model.setSuccess();
         },
         successChild: (data) {
@@ -80,7 +80,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                               return GestureDetector(
                                 child: Container(
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(
-                                      image: NetworkImage("${data.bannerList[index].imageUrl}"),
+                                      image: NetworkImage("${data.bannerList[index]?.imageUrl?? ""}"),
                                       fit: BoxFit.cover
                                   )),
                                 ),
@@ -94,7 +94,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                             },
                             autoplay: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: data.bannerList.length,
+                            itemCount: data?.bannerList?.length?? 0,
                             pagination: SwiperPagination(// 分页指示器
                                 alignment: Alignment.bottomCenter,// 位置 Alignment.bottomCenter 底部中间
                                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),// 距离调整
@@ -130,7 +130,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                       separatorBuilder: (context, index) {
                         return SizeDivider(width: Screen.h(30));
                       },
-                      itemCount: data.merchantItemList.length?? 0,
+                      itemCount: data?.merchantItemList?.length?? 0,
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,),
                   ),
@@ -149,7 +149,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                     separatorBuilder: (context, index) {
                       return Container(height: Screen.h(2), color: AppColors.color_f8f8f8);
                     },
-                    itemCount: data.merchantTaskItemList.length?? 0,
+                    itemCount: data?.merchantTaskItemList?.length?? 0,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,),
