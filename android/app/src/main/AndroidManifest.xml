@@ -11,8 +11,9 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:icon="@mipmap/ic_launcher"
-        android:label="MilletFlutterApp">
+        android:icon="@mipmap/lanba_icon"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:label="社区Flutter">
         <activity
             android:name="com.live.millet.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

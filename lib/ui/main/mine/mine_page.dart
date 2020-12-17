@@ -48,7 +48,7 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
                             GestureDetector(
                               child: ImageIcon(AssetImage(AppImages.mySetting), color: AppColors.color_FFFFFF, size: Screen.sp(55),),
                               onTap: () {
-                                _alertDialog();
+                                // _alertDialog();
                               },
                             )
                           ],
@@ -169,11 +169,18 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
   Widget get bottomHelp => Container(
     color: AppColors.color_FFFFFF,
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         itemApply(AppImages.myHelp1, "客服咨询"),
         itemApply(AppImages.myHelp2, "投诉建议"),
         itemApply(AppImages.myHelp3, "关于我们"),
+        GestureDetector(
+          child: itemApply(AppImages.myHelp3, "退出登录"),
+          onTap: () {
+            _alertDialog();
+          },
+        ),
+        SizeDivider(width: Screen.w(120)),
       ],
     ),
   );
