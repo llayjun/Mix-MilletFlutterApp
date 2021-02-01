@@ -115,8 +115,8 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                   }),
                   Container(
                     margin: EdgeInsets.all(Screen.w(45)),
-                    height: Screen.h(300),
-                    constraints: BoxConstraints(minHeight: Screen.h(300)),
+                    height: Screen.h(350),
+                    constraints: BoxConstraints(minHeight: Screen.h(350)),
                     alignment: Alignment.centerLeft,
                     child: ListView.separated(
                       itemBuilder: (context, index) {

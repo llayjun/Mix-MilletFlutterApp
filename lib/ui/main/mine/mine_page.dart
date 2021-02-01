@@ -44,7 +44,7 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin{
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            IconText("切换角色", padding: EdgeInsets.only(right: Screen.w(20)), textAlign: TextAlign.center, icon: Icon(Icons.add_link), iconSize: Screen.sp(55), style: TextStyle(fontSize: Screen.sp(46), color: AppColors.color_FFFFFF,)),
+                            IconText("切换角色", padding: EdgeInsets.only(right: Screen.w(20)), textAlign: TextAlign.center, icon: Icon(Icons.add_location), iconSize: Screen.sp(55), style: TextStyle(fontSize: Screen.sp(46), color: AppColors.color_FFFFFF,)),
                             GestureDetector(
                               child: ImageIcon(AssetImage(AppImages.mySetting), color: AppColors.color_FFFFFF, size: Screen.sp(55),),
                               onTap: () {

@@ -44,7 +44,7 @@ class _LoginUiState extends State<LoginUi> {
         child: Consumer<LoginVModel>(
           builder: (context, model, child) {
             return Scaffold(
-              appBar: AppBar(shadowColor: Colors.transparent, backgroundColor: AppColors.color_FFFFFF, actions: [
+              appBar: AppBar(backgroundColor: AppColors.color_FFFFFF, actions: [
                   GestureDetector(child: Container(child: Text("注册", style: TextStyle(color: AppColors.color_333333, fontSize: Screen.sp(46)),), alignment: Alignment.center, padding: EdgeInsets.only(right: Screen.w(45)),), onTap: () {
                     NavigatorUtil.push(context, RegisterUi());
                   },)

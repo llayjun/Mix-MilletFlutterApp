@@ -118,7 +118,7 @@ class _ArticleListPageState extends State<ArticleListPage> with AutomaticKeepAli
         child: Row(
           children: [
             CircleAvatar(
-              child: Text('${title.characters.first}'),
+              child: Text('$title'),
             ),
             Expanded(
               child: Padding(

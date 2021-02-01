@@ -12,7 +12,6 @@ Widget headView(BuildContext context, String title) => AppBar(
         ),
         onPressed: () {Navigator.pop(context);},
       ),
-      shadowColor: Colors.transparent,
       backgroundColor: AppColors.color_FFFFFF,
       title: Text(
         "$title",
